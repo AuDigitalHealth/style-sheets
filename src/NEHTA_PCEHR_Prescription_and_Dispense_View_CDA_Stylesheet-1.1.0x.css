@@ -1,0 +1,822 @@
+@media print
+{
+  .BANNER {
+            display: none;
+            }
+            
+            .BANNER_BACK {
+            top: 0px;
+            background-color: #000000;
+            color: #FFFFFF;
+            max-width: 1000px;
+            min-width: 760px;
+            width: 100%;
+            z-index: 10000;
+            word-wrap: break-word;
+            height: 90px;
+            }
+}
+@media screen
+{
+ .showHideHeaderDetailsButtonTableRow {
+            }
+			
+            .DETAILS {
+                min-width: 740px;
+                max-width: 980px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+                padding: 0px 0px 0px 0px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            
+            div#ROOT {
+                position:absolute;
+                min-width: 760px;
+                max-width: 1024px;
+            }
+            
+            .CONTENT {
+                min-width: 760px;
+                max-width: 1000px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+            }
+
+            .BODY {
+                min-width: 760px;
+                max-width: 1004px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+                padding: 0px 0px 0px 0px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+}
+@media all
+{
+            .nbspSpan {
+                margin-left: 4px;
+            }
+            
+            .pageWidth { 
+                min-width: 760px;
+                max-width: 1000px;
+                width: 100%;
+            }
+
+            .pageWidthWithLeftMargin { 
+                min-width: 760px;
+                max-width: 1010px;
+                width: 100%;
+            }
+            
+            .halfPageWidth { 
+                width: 500px; 
+            }
+            .quarterPageWidth { 
+                width: 250px; 
+            }
+
+            .sectionPageWidth {
+                width: 100%;
+            }
+            
+            .sectionPageWidthMinusMargin {
+                width: 98%;
+            }
+            
+             
+            ul {
+                padding-top: 0px;
+                margin-top: 0px;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+
+            ol {
+                padding-top: 0px;
+                margin-top: 0px;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+
+            .xFixed {
+                font-family:monospace;
+            }
+
+            .underline {
+                text-decoration: underline;
+            }
+            
+            .nounderline {
+                text-decoration: none;
+            }
+            
+            .bold {
+                font-weight: bold;
+            }
+            
+            .emphasis {
+                font-variant: small-caps;
+            }
+            
+            .italic {
+                font-style: italic;
+            }
+            
+            .Lrule {
+                border-left: 1px SOLID #000000;
+            }
+            
+            .Rrule {
+                border-right: 1px SOLID #000000;
+            }
+            
+            .botrule {
+                border-bottom: 1px SOLID #000000;
+            }
+            .toprule {
+                border-top: 1px SOLID #000000;
+            }
+            
+            .noLrule {
+                border-left: 1px SOLID #EEEEEE;
+            }
+            
+            .noRrule {
+                border-right: 1px SOLID #EEEEEE;
+            }
+            
+            .noBotrule {
+                border-bottom: 1px SOLID #EEEEEE;
+            }
+            
+            .noToprule {
+                border-top: 1px SOLID #EEEEEE;
+            }
+            
+            .paragraph {
+                border-spacing: 0px; 
+                padding: 0px;
+                border-spacing: 0px;
+                empty-cells: show;
+                page-break-inside: avoid;
+                border: 0px SOLID #EEEEEE;                    
+                word-wrap: break-word;
+            }
+            
+            .horizontalspacer {
+                height: 15px;
+                border-style: none;
+                border-width: 1px;
+                border-color: #FFFFFF;
+                min-width: 760px;
+                max-width: 1010px;
+                width: 100%;            
+            }
+
+            .groupspacer {
+                height: 8px;
+                border-style: none;
+                border-width: 1px;
+                border-color: #FFFFFF;
+                min-width: 760px;
+                max-width: 1010px;
+                width: 100%;            
+            }
+            
+            .hi {
+                font-size: 9px;
+            }
+
+            .PROVIDER_INDIVIDUAL_IDENTIFIER {
+                font-size: 9px;
+                margin-left: 20px;
+            }
+            
+            .PROVIDER_ORGANISATION_IDENTIFIER {
+                font-size: 9px;
+                margin-left: 20px;
+            }
+            
+            .PROVIDER_DEVICE_IDENTIFIER {
+                font-size: 9px;
+                margin-left: 20px;
+            }
+
+            .documentindicator {
+                width: 100%;
+                max-width: 980px;
+                min-width: 740px;
+                text-align: center;
+                vertical-align: middle;
+                font-weight: bold;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .documentindicatorcolours {
+                background: #555;
+                color: #FFFFFF;
+            }
+            
+            .addressdl {
+                display: inline;
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+            }
+            
+            .addressdt {
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+                font-weight: bold;
+            }
+            
+            .addressdd {
+                display: inline;
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+            }
+
+            .contactdetailsul {
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+                padding-left: 0;
+                text-align: left;
+            }
+            
+            .contactdetailsli {
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+            }
+            
+            .contactdetailsdl {
+                display: inline;
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+            }
+            
+            .contactdetailsdt {
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+                font-weight: bold;
+            }
+            
+            .contactdetailsdd {
+                display: inline;
+                margin: 0px;
+                padding: 0px;
+                text-align: left;
+            }
+            
+            .specialtiesul {
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+                padding-left: 0;
+                text-align: left;
+            }
+            
+            .BANNER {
+                top: 0px;
+                background-color: #000000;
+                color: #FFFFFF;
+                max-width: 1000px;
+                min-width: 760px;
+                width: 100%;
+                z-index: 10000;
+                position: fixed;
+                word-wrap: break-word;
+                height: 90px;
+            }
+
+            .BANNER_BACK {
+                top: 0px;
+                background-color: #000000;
+                color: #FFFFFF;
+                max-width: 1000px;
+                min-width: 760px;
+                width: 100%;
+                z-index: 10000;
+                word-wrap: break-word;
+                height: 90px;
+            }
+            
+            .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+            .clearfix {display: inline-block;}
+            /* Hides from IE-mac \*/
+            * html .clearfix {height: 1%;}
+            .clearfix {display: block;}
+            /* End hide from IE-mac */
+            
+            .BANNER_DOCUMENT_TITLE_DIV {
+                padding-top: 5px;
+                vertical-align: top;
+                text-align: center;
+                margin 0px;
+                font-size: 18px;
+                font-family: Helvetica;
+                color: #FFFFFF;
+                font-weight: bold;
+                word-wrap: break-word;
+            }
+
+            .BANNER_PATIENT_DETAILS_DIV {
+                padding-top: 15px;
+                padding-left: 15px;
+                padding-right: 15px;
+                vertical-align: top;
+                text-align: left;
+                overflow: auto;
+            }
+            
+            .BANNER_VIEW_DETAILS_DIV {
+                text-align: center;
+                padding-top: 5px;
+                padding-left: 15px;
+                padding-right: 15px;
+                vertical-align: top;            
+            }
+            
+            .bannerDl {
+                width: 100%;
+                display: inline;
+            }
+            
+            .bannerDt {
+                display: inline;
+                font-size: 14px;
+                color: #CCCCCC;
+            }
+            
+            .bannerDd {
+                margin-left: 0px;
+                display: inline;
+                font-size: 14px;
+                margin-right: 30px;
+            }
+            
+            .authorOrganisationClass {
+                font-size: 26px;
+                font-family: Helvetica;
+                color: #000000;
+            }
+
+            .spacedSection {  
+                margin-bottom: 0px;
+                margin-top: 0px;
+            }
+            
+            .detailsHalfTableHeaderDiv {
+                font-style: italic;
+                color: #000000;
+                font-weight: bold;
+                margin-bottom: 3px;
+                width: 100%;
+                word-wrap: break-word;
+            }
+
+            .detailsHalfTable {
+                table-layout: fixed;
+                width: 100%;
+                spacing: 0px;
+                padding: 0px;
+                borer: 0px;
+                margin-bottom: 15px;
+            }
+            
+            .detailsHalfTableTh {
+                width: 35%;
+                word-wrap: break-word;
+                vertical-align: top;
+                text-align: left;
+            }
+
+            .detailsHalfTableThSpan {
+                word-wrap: break-word;
+                font-style: normal;
+                color: #999999;
+            }
+            
+            .detailsHalfTableTd {
+                width: 65%;
+                word-wrap: break-word;
+                vertical-align: top;
+                word-wrap: break-word;
+            }
+
+            .identifier {
+                margin-left: 20px; 
+                font-size: 9px;
+            }
+            
+            .detailsTable {
+                table-layout: fixed;
+                margin-left: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                border-top: 0px;
+                border-bottom: 1px SOLID #000000;
+                width: 100%;
+            }
+            
+            .detailsTableTr {
+                vertical-align: top;
+            }
+            
+            .detailsTableTd {
+                background-color:#F1F1F1;
+                width: 50%;
+            }
+            
+            .detailsTableTh {
+                background-color:#F1F1F1;
+                text-align: left;
+            }
+            
+            .sectionHeader {
+                width: 100%;
+                font-size: 17px;
+                font-weight: bold;
+                color: #000000;
+                margin-bottom: 5px;
+                margin-top: 0px;
+                border-bottom: 1px SOLID #000000;;
+                padding: 0px;
+                word-wrap: break-word;
+            }
+            
+            .nestedSectionHeader {
+                width: 98%;
+                font-size: 17px;
+                font-weight: bold;
+                color: #000000;
+                margin-bottom: 5px;
+                border-bottom: 1px SOLID #000000;;
+                word-wrap: break-word;
+            }
+            
+            .participantsHeader {
+                font-size: 17px;
+                font-weight: bold;
+                color: #000000;
+                margin-bottom: 5px;
+                margin-top: 0px;
+                border-bottom: 1px SOLID #000000;
+                padding: 0px;
+                min-width: 740px;
+                max-width: 980px;
+                margin-left: 10px;
+                margin-right: 10px
+            }
+                        
+            .listTableCaption {
+                font-style: italic;
+                color: #999999;
+                font-weight: bold;
+                font-size: 12px;
+                padding: 5px 5px 5px 0px;
+                text-align: left;
+            }
+            
+            .participantsTableClass {
+                padding: 0px;
+                border-spacing: 0px;
+                border-collapse: collapse;
+                page-break-inside: avoid;
+                table-layout: fixed;
+                word-wrap: break-word;
+                margin-bottom: 15px;
+                min-width: 740px;
+                max-width: 980px;
+                margin-left: 10px;
+                margin-right: 10px
+            }
+                        
+            
+            body { 
+                font-size: 12px;
+                font-family: Verdana, Helvetica, Sans-Serif;
+                padding; 0px;
+                color: #000000;
+                margin: 0px;
+                padding: 0px;
+                min-width: 760px;
+                max-width: 1000px;
+            }
+            
+            pre {
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                margin:0px;
+            }
+            
+            p.div {
+                width: 1000px;
+            }
+            
+            a:link { 
+                color: blue;
+            }
+            
+            a:visited { 
+                color: blue;
+            }
+            
+            a:hover {
+                color: red;
+            }
+            
+            a:active {
+                color: red;
+            }
+            
+            a.ageLink {
+                text-decoration: none;
+            }
+            
+            a.ageLink:link { 
+                color: #FFFFFF;
+            }
+            
+            a.ageLink:visited { 
+                color: #FFFFFF;
+            }
+            
+            a#ageLink:hover {
+                color: #FFFFFF;
+            }
+            
+            a#ageLink:active {
+                color: #FFFFFF;
+            }
+                                  
+            
+
+            .HeadingsTable {
+                border-collapse: collapse;
+                border-right: 0px SOLID #000000;
+                border-left: 0px SOLID #000000;
+                border-bottom: 0px SOLID #000000;
+                border-top: 0px SOLID #000000;
+                background-color: #FFFFFF;
+                margin-bottom: 0px;
+                margin-top: 0px;
+            }
+            
+            .HeadingsTableDateHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                width: 90px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableMedicineDetailsHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                padding: 5px;
+                text-align: left;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableFirstDispenseHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                width: 90px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableLastDispenseHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                width: 91px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableSupplyHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                width: 91px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableGenericNameHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTableBrandNameHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                font-weight: bold;
+            }
+            
+            .HeadingsTablePBSItemCodeHeading {
+                font-size: 10px;
+                color: #555;
+                font-family: Verdana;
+                text-align: left;
+                padding: 5px;
+                font-weight: bold;
+            }
+            
+            .GroupTable { 
+                border-collapse: collapse;
+                background-color: #FEEAA6;
+                margin: 0 auto;
+                margin-bottom: 0px;
+                margin-top: 0px;
+                padding: 0px;
+            }
+            
+            .GroupTableBorder {
+                border-right: 1px SOLID #000000;
+                border-left: 1px SOLID #000000;
+                border-bottom: 1px SOLID #000000;
+                border-top: 1px SOLID #000000;
+            }
+            
+            .GroupTableDate {
+                font-weight: normal;
+                text-align: right;
+                vertical-align: top;
+                width: 90px;
+                padding: 5px;
+            }
+            
+            .GroupTableMedicineDetails {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 560px;
+                padding: 5px;
+            }
+            
+            
+            
+            .GroupTableFirstDispense {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 90px;
+                padding: 5px;
+            }
+            
+            .GroupTableLastDispense {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 90px;
+                padding: 5px;
+            }
+            
+            .GroupTableSupply {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 90px;
+                padding: 5px;
+            }
+            
+            .GroupTableGenericName {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                padding: 5px;
+            }
+
+            .GroupTableBrandName {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                padding: 5px;
+            }
+            
+			.GroupTablePBSItemCode {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                padding: 5px;
+            }
+            
+            .GroupTableNoGrouping {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                padding: 5px;
+            }
+			
+            .GroupTableNoInformation {
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 90px;
+                padding: 5px;
+            }
+
+            .GroupEntriesTable {
+                border-right: 0px SOLID #FFFFFF;
+                border-left: 0px SOLID #FFFFFF;
+                border-bottom: 0px SOLID #FFFFFF;
+                border-top: 0px SOLID #FFFFFF;
+                background-color: #FFFFFF;
+                margin-bottom: 0px;
+                margin-top: 0px;
+                padding: 0px;
+                border-spacing: 0px;
+            }
+            
+            .GroupEntriesTableEntryDate {
+                background-color: white;
+                font-weight: normal;
+                text-align: right;
+                vertical-align: top;
+                width: 90px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                border-top: 1px SOLID #000000;
+            }
+            
+            .GroupEntriesTableEntryType {
+                background-color: white;
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                width: 90px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                border-top: 1px SOLID #000000;
+            }
+            
+            .GroupEntriesTableEntryDetails {
+                background-color: white;
+                font-weight: normal;
+                text-align: left;
+                vertical-align: top;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                border-top: 1px SOLID #000000;
+            }
+           
+            a.documentLink {
+            text-decoration: none;
+            }
+            
+            a.documentLink:link { 
+            color: #000000;
+            }
+            
+            a.documentLink:visited { 
+            color: #000000;
+            }
+            
+            a.documentLink:hover { 
+            color: #FF0000;
+            }
+            
+            a.documentLink:active { 
+            color: #FF0000;
+            } 
+}
