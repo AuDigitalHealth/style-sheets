@@ -284,3 +284,16 @@ The below is a history log of changes made to the style sheet.
 #### NEHTA_PCEHR_Prescription_and_Dispense_View_CDA_Stylesheet-1.0.0 - 06/03/2013
 ---
 - First published version 
+
+
+
+---
+### > DH_Diagnostic_Imaging_And_Pathology_View Style Sheet Revision Log
+---
+The below is a history log of changes made to the style sheet.
+
+
+#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.0 - alpha1 - /06/2018
+---
+- Updated initial version to align with Presentation Guide
+
