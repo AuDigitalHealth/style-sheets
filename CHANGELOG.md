@@ -293,7 +293,7 @@ The below is a history log of changes made to the style sheet.
 The below is a history log of changes made to the style sheet.
 
 
-#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.0 - alpha1 - /06/2018
+#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.x - alpha1 - 14/06/2018
 ---
 - Updated initial version to align with Presentation Guide
 
