@@ -20,7 +20,8 @@ functionality deemed necessary or requested.
 #### DH_Generic_CDA_Stylesheet-1.5.0 | xx/xx/201x
 ---
 - Added OID for PCML
-
+- Removed escaped space before Participant Header
+- Add support for iFrame to display PDFs in certain doc types (default off)
 
 #### DH_Generic_CDA_Stylesheet-1.4.0 | 11/07/2017
 ---
@@ -293,7 +294,7 @@ The below is a history log of changes made to the style sheet.
 The below is a history log of changes made to the style sheet.
 
 
-#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.1 - 19/06/2018
+#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.0 - alpha1 - /06/2018
 ---
 - Updated initial version to align with Presentation Guide
 

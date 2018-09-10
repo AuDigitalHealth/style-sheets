@@ -34,13 +34,15 @@
 
 	Version 1.5.0 | xx/xx/2018
 	- Added OID for PCML
+	- Removed escaped space before Participant Header
+	- Add support for iFrame to display PDFs in certain doc types (default off)
 	
 	Version 1.4.0 | 11/07/2017	
 	- Added optional HPI-O for certain Recipient scenarios (asOrganizationPartOf)
 	- Added optional HPI-O for Author, Responsible HP for DS and Requester
 	- Fixed up every location where <xsl:call-template name="addID"> is called before 
 	  <attribute> rather than after. Affected cda:list, cda:table and cda:paragraph
-	- Added support for Service Referral
+	 - Added support for Service Referral
 	
 	Version 1.3.0 | 06/01/2017
 	- Updated Owner The Australian Digital Health Agency
@@ -163,6 +165,7 @@
     <xsl:param name="administrativeObservationsSectionDisplay">true</xsl:param>
     <xsl:param name="showProviderHomeDetails">false</xsl:param>
     <xsl:param name="bannerDisplay">true</xsl:param>
+	<xsl:param name="supportiFrameForCertainDocTypes">false</xsl:param>
     
     <!-- OUTPUT -->
     <!--================================================================================================================================================================================-->
@@ -289,6 +292,8 @@
     <xsl:variable name="DETAILS_HALF_TABLE_TH_WIDTH_PCT">35</xsl:variable>
     <xsl:variable name="DETAILS_HALF_TABLE_TD_WIDTH_PCT" select="100 - $DETAILS_HALF_TABLE_TH_WIDTH_PCT"/>
     
+	<xsl:variable name="IFRAME_CONTENT_WIDTH_PX">960</xsl:variable>
+	<xsl:variable name="IFRAME_CONTENT_HEIGHT_PX">1000</xsl:variable>
 
     <xsl:variable name="AKA_STRING">a.k.a. </xsl:variable>
     <xsl:variable name="SECTION_TITLE_NAVIGATION_SEPARATOR" select="' > '"/>
@@ -750,7 +755,7 @@
                         <xsl:attribute name="class">DETAILS</xsl:attribute>
                         <xsl:call-template name="getAuthorDetailsAndLogoTable"/>
                     </xsl:element>
-            
+					
                     <!-- Display the Body -->
                     <xsl:element name="div">
                         <xsl:attribute name="class">BODY</xsl:attribute>
@@ -759,7 +764,8 @@
                                 <xsl:apply-templates select="cda:component/cda:nonXMLBody"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:call-template name="processStructuredBody">
+								<xsl:call-template name="getPDFinIFrame"/>
+								<xsl:call-template name="processStructuredBody">
                                     <xsl:with-param name="structuredBody" select="cda:component/cda:structuredBody"/>
                                     <xsl:with-param name="processAdministrativeObservations">no</xsl:with-param>
                                 </xsl:call-template>
@@ -838,8 +844,51 @@
     <!--================================================================================================================================================================================-->
     <!-- [END] ENTRY TEMPLATE -->
     
+	
+	<!-- iFrame TEMPLATE -->
+    <!--================================================================================================================================================================================-->
     
-    
+	<!-- Put in iFrame to show PDF if enabled-->
+	<xsl:template name="getPDFinIFrame">
+		<xsl:if test="$supportiFrameForCertainDocTypes!='false'">
+			<!-- Path, DI, Advance Care Planning or PCML Document only -->
+			<xsl:if test="($cdaDocumentType=$DH_PATHOLOGY_REPORT_CLINICAL_DOCUMENT_TYPE_NAME 
+			            or $cdaDocumentType=$DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME
+						or $cdaDocumentType=$DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME)">
+				<!-- Is there an external document reference? -->
+				<xsl:if test="string-length(//cda:reference/cda:externalDocument/cda:text/cda:reference/@value) &gt; 0">
+					<xsl:element name="div">
+					<xsl:attribute name="style">margin-left:<xsl:value-of select="$LEFT_MARGIN_WIDTH_PX"/>px</xsl:attribute>
+						<xsl:element name="iframe">
+							<xsl:attribute name="src"><xsl:value-of select="//cda:reference/cda:externalDocument/cda:text/cda:reference/@value"/></xsl:attribute>
+							<xsl:attribute name="scrolling">yes</xsl:attribute>
+							<xsl:attribute name="frameborder">1</xsl:attribute>
+							<xsl:attribute name="width"><xsl:value-of select="$IFRAME_CONTENT_WIDTH_PX"/></xsl:attribute>
+							<xsl:attribute name="height"><xsl:value-of select="$IFRAME_CONTENT_HEIGHT_PX"/></xsl:attribute>
+						</xsl:element>
+					</xsl:element>
+				</xsl:if>
+			</xsl:if>
+			<xsl:if test="($cdaDocumentType=$DH_PHARMACIST_CURATED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME)">
+				<!-- Is there an external document reference? -->
+				<xsl:if test="string-length(//cda:entry/cda:observationMedia[@ID!='LOGO']/cda:value/cda:reference/@value) &gt; 0">
+					<xsl:element name="div">
+					<xsl:attribute name="style">margin-left:<xsl:value-of select="$LEFT_MARGIN_WIDTH_PX"/>px</xsl:attribute>
+						<xsl:element name="iframe">
+							<xsl:attribute name="src"><xsl:value-of select="//cda:entry/cda:observationMedia[@ID!='LOGO']/cda:value/cda:reference/@value"/></xsl:attribute>
+							<xsl:attribute name="scrolling">yes</xsl:attribute>
+							<xsl:attribute name="frameborder">1</xsl:attribute>
+							<xsl:attribute name="width"><xsl:value-of select="$IFRAME_CONTENT_WIDTH_PX"/></xsl:attribute>
+							<xsl:attribute name="height"><xsl:value-of select="$IFRAME_CONTENT_HEIGHT_PX"/></xsl:attribute>
+						</xsl:element>
+					</xsl:element>
+				</xsl:if>
+			</xsl:if>			
+		</xsl:if>
+	</xsl:template>
+
+
+    <!--================================================================================================================================================================================-->
     
     <!-- BANNER TEMPLATES -->
     <!--================================================================================================================================================================================-->   
@@ -2499,7 +2548,7 @@
         
         <xsl:element name="h1">
             <xsl:attribute name="class">participantsHeader</xsl:attribute>
-            &#160;Participants
+            Participants
         </xsl:element>
         <xsl:element name="table">
             <xsl:attribute name="id"><xsl:value-of select="$tableId"/></xsl:attribute>
@@ -2586,7 +2635,7 @@
         
         <xsl:element name="h1">
             <xsl:attribute name="class">participantsHeader</xsl:attribute>
-            &#160;<xsl:value-of select="$title"/>
+			<xsl:value-of select="$title"/>
         </xsl:element>
         
         <xsl:element name="table">
