@@ -22,6 +22,7 @@ functionality deemed necessary or requested.
 - Added OID for PCML
 - Removed escaped space before Participant Header
 - Add support for iFrame to display PDFs in certain doc types (default off)
+- Updated PCML to PSML
 
 #### DH_Generic_CDA_Stylesheet-1.4.0 | 11/07/2017
 ---

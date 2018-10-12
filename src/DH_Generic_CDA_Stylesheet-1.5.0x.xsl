@@ -36,6 +36,7 @@
 	- Added OID for PCML
 	- Removed escaped space before Participant Header
 	- Add support for iFrame to display PDFs in certain doc types (default off)
+	- Updated PCML to PSML description
 	
 	Version 1.4.0 | 11/07/2017	
 	- Added optional HPI-O for certain Recipient scenarios (asOrganizationPartOf)
@@ -235,7 +236,7 @@
     <xsl:variable name="DH_PATHOLOGY_REPORT_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.220</xsl:variable>
 	<xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.222</xsl:variable>
 	<xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.226</xsl:variable>
-	<xsl:variable name="DH_PHARMACIST_CURATED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.237</xsl:variable>
+	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.237</xsl:variable>
 	
 	<!-- Clinical Document Type Names -->
     <xsl:variable name="DH_DISCHARGE_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Discharge Summary</xsl:variable>
@@ -263,7 +264,7 @@
     <xsl:variable name="DH_PATHOLOGY_REPORT_CLINICAL_DOCUMENT_TYPE_NAME">Pathology Report</xsl:variable>
     <xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME">Diagnostic Imaging Report</xsl:variable>
     <xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME">Advance Care Information</xsl:variable>
-	<xsl:variable name="DH_PHARMACIST_CURATED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME">Pharmacist Curated Medicines List</xsl:variable>
+	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME">Pharmacist Shared Medicines List</xsl:variable>
 	
     <!-- Page widths and heights -->
     <xsl:variable name="FULL_VIEWPORT_WIDTH_PX">1024</xsl:variable>
@@ -506,7 +507,7 @@
             <xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_PATHOLOGY_REPORT_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_PATHOLOGY_REPORT_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
             <xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_DIAGNOSTIC_IMAGING_REPORT_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
             <xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_ADVANCE_CARE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
-			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_PHARMACIST_CURATED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_PHARMACIST_CURATED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_PHARMACIST_SHARED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
             <xsl:when test="/cda:ClinicalDocument/cda:code/@displayName and
                             string-length(/cda:ClinicalDocument/cda:code/@displayName) &gt; 0">
                 <xsl:value-of select="/cda:ClinicalDocument/cda:code/@displayName"/>
@@ -869,7 +870,7 @@
 					</xsl:element>
 				</xsl:if>
 			</xsl:if>
-			<xsl:if test="($cdaDocumentType=$DH_PHARMACIST_CURATED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME)">
+			<xsl:if test="($cdaDocumentType=$DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME)">
 				<!-- Is there an external document reference? -->
 				<xsl:if test="string-length(//cda:entry/cda:observationMedia[@ID!='LOGO']/cda:value/cda:reference/@value) &gt; 0">
 					<xsl:element name="div">
