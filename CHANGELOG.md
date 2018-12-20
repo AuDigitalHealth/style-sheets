@@ -23,8 +23,8 @@ functionality deemed necessary or requested.
 - Removed escaped space before Participant Header
 - Added support for iFrame to display PDFs in certain doc types (default off)
 - Updated PCML to PSML description
-- Added hidePatientContactDetails param to allow override of hiding of contact details
-  To safeguard against the risk the estranged partners, the default is true
+- Added hidePatientContactDetails param to allow override masking patient address 
+  and other contact details for documents obtained from My Health Record, the default is true
 	  
 #### DH_Generic_CDA_Stylesheet-1.4.0 | 11/07/2017
 ---

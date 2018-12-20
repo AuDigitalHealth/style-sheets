@@ -37,8 +37,8 @@
 	- Removed escaped space before Participant Header
 	- Added support for iFrame to display PDFs in certain doc types (default off)
 	- Updated PCML to PSML description
-	- Added hidePatientContactDetails param to allow override of hiding of contact details
-	  To safeguard against the risk the estranged partners, the default is true
+	- Added hidePatientContactDetails param to allow override masking patient address 
+	  and other contact details for documents obtained from My Health Record, the default is true
 	
 	Version 1.4.0 | 11/07/2017	
 	- Added optional HPI-O for certain Recipient scenarios (asOrganizationPartOf)
@@ -2122,7 +2122,7 @@
                     </xsl:if>
                 </xsl:for-each>
                 
-				<!-- To safeguard against the risk the estranged partners -->
+				<!-- To mask patient address and other contact details for documents obtained from My Health Record -->
 				<xsl:if test="$hidePatientContactDetails!='true'">
 					<xsl:call-template name="getAddressDetailsRows">
 						<xsl:with-param name="personOrOrg" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole"/>
