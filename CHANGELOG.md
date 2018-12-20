@@ -17,13 +17,15 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
-#### DH_Generic_CDA_Stylesheet-1.5.0 | xx/xx/201x
+#### DH_Generic_CDA_Stylesheet-1.5.0 | 20/12/2018
 ---
 - Added OID for PCML
 - Removed escaped space before Participant Header
-- Add support for iFrame to display PDFs in certain doc types (default off)
-- Updated PCML to PSML
-
+- Added support for iFrame to display PDFs in certain doc types (default off)
+- Updated PCML to PSML description
+- Added hidePatientContactDetails param to allow override of hiding of contact details
+  To safeguard against the risk the estranged partners, the default is true
+	  
 #### DH_Generic_CDA_Stylesheet-1.4.0 | 11/07/2017
 ---
 - Added optional HPI-O for certain Recipient scenarios (asOrganizationPartOf)

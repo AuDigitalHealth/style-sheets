@@ -32,11 +32,13 @@
     
     Revision History:
 
-	Version 1.5.0 | xx/xx/2018
+	Version 1.5.0 | 20/12/2018
 	- Added OID for PCML
 	- Removed escaped space before Participant Header
-	- Add support for iFrame to display PDFs in certain doc types (default off)
+	- Added support for iFrame to display PDFs in certain doc types (default off)
 	- Updated PCML to PSML description
+	- Added hidePatientContactDetails param to allow override of hiding of contact details
+	  To safeguard against the risk the estranged partners, the default is true
 	
 	Version 1.4.0 | 11/07/2017	
 	- Added optional HPI-O for certain Recipient scenarios (asOrganizationPartOf)
@@ -167,6 +169,7 @@
     <xsl:param name="showProviderHomeDetails">false</xsl:param>
     <xsl:param name="bannerDisplay">true</xsl:param>
 	<xsl:param name="supportiFrameForCertainDocTypes">false</xsl:param>
+	<xsl:param name="hidePatientContactDetails">true</xsl:param>
     
     <!-- OUTPUT -->
     <!--================================================================================================================================================================================-->
@@ -2119,15 +2122,19 @@
                     </xsl:if>
                 </xsl:for-each>
                 
-                <xsl:call-template name="getAddressDetailsRows">
-                    <xsl:with-param name="personOrOrg" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole"/>
-                    <xsl:with-param name="isPatient" select="'true'" />
-                </xsl:call-template>
-                
-                <xsl:call-template name="getContactDetailsRows">
-                    <xsl:with-param name="personOrOrg" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole"/>
-                    <xsl:with-param name="isPatient" select="'true'" />
-                </xsl:call-template>
+				<!-- To safeguard against the risk the estranged partners -->
+				<xsl:if test="$hidePatientContactDetails!='true'">
+					<xsl:call-template name="getAddressDetailsRows">
+						<xsl:with-param name="personOrOrg" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole"/>
+						<xsl:with-param name="isPatient" select="'true'" />
+					</xsl:call-template>
+				
+					<xsl:call-template name="getContactDetailsRows">
+						<xsl:with-param name="personOrOrg" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole"/>
+						<xsl:with-param name="isPatient" select="'true'" />
+					</xsl:call-template>
+                </xsl:if>
+
             </xsl:element> <!-- </tbody> -->
         </xsl:element> <!-- </table> -->
     </xsl:template>
