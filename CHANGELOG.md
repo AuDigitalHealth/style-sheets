@@ -17,6 +17,21 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+
+#### DH_Generic_CDA_Stylesheet-1.6.0 | 23/07/2019
+---
+- Added ACSQHC recommendations as per document:
+  National-guidelines-for-on-screen-presentation-of-discharge-summaries-Feb-2018.pdf
+  Updated 3 headers text, Font Sizes, Uppercase all SURNAMES, added LoS
+- Added space after Author name and before specialty
+- Removed redundant attributes (eg summary, valign)
+- Addressed Usability issues
+- Improved age display
+- Added captions to tables with hidden text for screen readers
+- Moved Styles out into CSS
+- Param for widescreen mode
+- Added additional Javascript detection when whitespace chars used
+	
 #### DH_Generic_CDA_Stylesheet-1.5.0 | 20/12/2018
 ---
 - Added OID for PCML
