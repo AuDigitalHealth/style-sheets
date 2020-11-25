@@ -277,6 +277,14 @@ functionality deemed necessary or requested.
 ---
 The below is a history log of changes made to the style sheet.
 
+#### NEHTA_PCEHR_Prescription_and_Dispense_View_CDA_Stylesheet-1.1.1 - 25/11/2020
+---
+	- Updated Owner The Australian Digital Health Agency
+	- Updated description removing the PCEHR from title
+	- Replaced NEHTA with DH for env variables
+	- Replaced PCEHR with MHR for env variables
+	- Update JQuery to v3.5.1
+
 #### NEHTA_PCEHR_Prescription_and_Dispense_View_CDA_Stylesheet-1.1.0 - 28/03/2013
 ---
 - Added "no grouping" functionality
