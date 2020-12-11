@@ -17,6 +17,12 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.0 | dd/mm/2019
+---
+- Added Title for iFrame document types for screen readers
+- Fixed up css styles 
+- Added downloadedFromMyHRDT param to allow systems to add the date downloaded to appear 
+  in the the Administrative Details section (for viewing and printing)
 
 #### DH_Generic_CDA_Stylesheet-1.6.0 | 23/07/2019
 ---
@@ -319,8 +325,12 @@ The below is a history log of changes made to the style sheet.
 ---
 The below is a history log of changes made to the style sheet.
 
+#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.2 - 10/12/2020
+- Headers in path report for specimen and report date the wrong way around
 
-#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.0 - alpha1 - /06/2018
+    
+#### DH_Diagnostic_Imaging_And_Pathology_View_CDA_Stylesheet-1.1.1 - 19/06/2018
 ---
 - Updated initial version to align with Presentation Guide
+- Updated to match presentation guide
 
