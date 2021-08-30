@@ -147,7 +147,7 @@
             }
 
             .documentTitleTable {
-				border-spacing: 0;
+				border-spacing: 0px;
 				border-collapse: collapse;			
                 margin-bottom: 15px;
                 margin-top: 12px;
@@ -380,7 +380,7 @@
                 list-style-type: none;
                 margin: 0px;
                 padding: 0px;
-                padding-left: 0;
+                padding-left: 0px;
                 text-align: left;
             }
             
@@ -415,7 +415,7 @@
                 list-style-type: none;
                 margin: 0px;
                 padding: 0px;
-                padding-left: 0;
+                padding-left: 0px;
                 text-align: left;
             }
             
@@ -463,7 +463,7 @@
                 padding-top: 15px;
                 vertical-align: top;
                 text-align: center;
-                margin 0px;
+                margin: 0px;
                 font-size: 20px;
                 font-family: Helvetica;
                 color: #FFFFFF;
@@ -474,7 +474,7 @@
             .BANNER_DOCUMENT_DATE_DIV {
                 vertical-align: top;
                 text-align: center;
-                margin 0px;
+                margin: 0px;
                 font-size: 15px;
                 font-family: Helvetica;
                 color: #FFFFFF;
@@ -536,9 +536,9 @@
             .detailsHalfTable {
                 table-layout: fixed;
                 width: 100%;
-                spacing: 0px;
+                border-spacing: 0px;
                 padding: 0px;
-                borer: 0px;
+                border: 0px;
                 margin-bottom: 15px;
             }
             
@@ -552,7 +552,7 @@
             .detailsHalfTableThSpan {
                 word-wrap: break-word;
                 font-style: normal;
-                color: #727272;
+                color: #6E6E6E;
             }
             
             .detailsHalfTableTd {
@@ -595,7 +595,7 @@
                 color: #000000;
                 margin-bottom: 5px;
                 margin-top: 0px;
-                border-bottom: 1px SOLID #000000;;
+                border-bottom: 1px SOLID #000000;
                 padding: 0px;
                 word-wrap: break-word;
             }
@@ -606,7 +606,7 @@
                 font-weight: bold;
                 color: #000000;
                 margin-bottom: 5px;
-                border-bottom: 1px SOLID #000000;;
+                border-bottom: 1px SOLID #000000;
                 word-wrap: break-word;
             }
             
@@ -626,7 +626,7 @@
                         
             .listTableCaption {
                 font-style: italic;
-                color: #727272;
+                color: #6E6E6E;
                 font-weight: bold;
                 font-size: 13px;
                 padding: 5px 5px 5px 0px;
@@ -688,7 +688,7 @@
             body { 
                 font-size: 13px;
                 font-family: Verdana, Helvetica, Sans-Serif;
-                padding; 0px;
+                padding: 0px;
                 color: #000000;
                 margin: 0px;
                 padding: 0px;

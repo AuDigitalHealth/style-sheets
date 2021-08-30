@@ -17,12 +17,13 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
-#### DH_Generic_CDA_Stylesheet-1.7.0 | dd/mm/2019
+#### DH_Generic_CDA_Stylesheet-1.7.0 | 01/09/2021
 ---
 - Added Title for iFrame document types for screen readers
-- Fixed up css styles 
+- Fixed up css styles inc Contrast colour 4.5:1 for gray shades
 - Added downloadedFromMyHRDT param to allow systems to add the date downloaded to appear 
   in the the Administrative Details section (for viewing and printing)
+- Include support for originalText for Title of CDA document
 
 #### DH_Generic_CDA_Stylesheet-1.6.0 | 23/07/2019
 ---
