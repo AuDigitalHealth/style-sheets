@@ -17,6 +17,11 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.1 | 11/02/2022
+---
+- Fix issue around Encounter details not showing in Admin Details section for other docs
+- Param added to hide Admin Details
+
 #### DH_Generic_CDA_Stylesheet-1.7.0 | 01/09/2021
 ---
 - Added Title for iFrame document types for screen readers
