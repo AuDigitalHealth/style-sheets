@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright 2019 The Australian Digital Health Agency (The Agency)
+    Copyright 2023 The Australian Digital Health Agency (The Agency)
    
     Production Disclaimer - 
 
@@ -32,6 +32,16 @@
     
     Revision History:
 
+	Version 1.7.2 | 26/05/2023
+	- Tidy up css
+	- Support for https in electronic medium
+	- Added test for all other Communication Medium types
+	- Added variable to make contact websites clickable - off by default
+	- Added NOT - Urgent Notification Contact for Participant
+	- Added support for HL7 fhir gender types
+	- Added support for ACTS documents
+	- Added support for MyMedicare Registered Practice Information
+	
 	Version 1.7.1 | 11/02/2022
 	- Fix issue around Encounter details not showing in Admin Details section for other docs
 	- Param added to hide Admin Details
@@ -198,7 +208,8 @@
 	<xsl:param name="wideScreen">false</xsl:param>
 	<xsl:param name="downloadedFromMyHRDT"></xsl:param>
 	<xsl:param name="administrativeSectionDisplay">true</xsl:param>
-    
+	<xsl:param name="makeContactWebsitesClickable">false</xsl:param>
+
     <!-- OUTPUT -->
     <!--================================================================================================================================================================================-->
     <xsl:output method="html" indent="yes" version="4.01" encoding="UTF-8"
@@ -216,7 +227,7 @@
     <xsl:variable name="DH_CDA_RENDERING_SPECIFICATION_OID">1.2.36.1.2001.1001.100.149</xsl:variable>
     
     <!-- Version of the Generic CDA Stylesheet -->
-    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.1</xsl:variable>
+    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.2</xsl:variable>
     
     
     <!-- Version note -->
@@ -269,6 +280,10 @@
 	<xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.222</xsl:variable>
 	<xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.226</xsl:variable>
 	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.237</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32044</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32046</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32049</xsl:variable>
+	<xsl:variable NAME="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32048</xsl:variable>
 	
 	<!-- Clinical Document Type Names -->
     <xsl:variable name="DH_DISCHARGE_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Discharge Summary</xsl:variable>
@@ -297,6 +312,10 @@
     <xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME">Diagnostic Imaging Report</xsl:variable>
     <xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME">Advance Care Information</xsl:variable>
 	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME">Pharmacist Shared Medicines List</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Transfer Reason</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Medication Chart</xsl:variable>
+	<xsl:variable NAME="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Health Summary</xsl:variable>
+	<xsl:variable NAME="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME">MyMedicare Registered Practice Information</xsl:variable>
 	
 	<!-- Accessibility Global Documents Text -->
 	<xsl:variable name="ADVANCE_CARE_PLANNING_IFRAME_TITLE_TEXT">PDF attachment containing information about an advance care plan.</xsl:variable>
@@ -502,10 +521,24 @@
                       string-length(/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code) &gt; 0 and
                       /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@codeSystem='2.16.840.1.113883.13.68'">
             <xsl:choose>
+				<!-- Sex -->
                 <xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'M'">Male</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'F'">Female</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'I'">Intersex or Indeterminate</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'N'">Not Stated/Inadequately Described</xsl:when>
+                <xsl:otherwise>Unknown</xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+        <xsl:if test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode and
+                      /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code and
+                      string-length(/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code) &gt; 0 and
+                      /cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@codeSystem='2.16.840.1.113883.4.642.3.1'">
+            <xsl:choose>
+				<!-- Gender -->
+				<xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'male'">Male</xsl:when>
+				<xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'female'">Female</xsl:when>
+				<xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'other'">Other</xsl:when>
+				<xsl:when test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:administrativeGenderCode/@code = 'unknown'">Unknown</xsl:when>
                 <xsl:otherwise>Unknown</xsl:otherwise>
             </xsl:choose>
         </xsl:if>
@@ -584,6 +617,10 @@
             <xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_DIAGNOSTIC_IMAGING_REPORT_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
             <xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_ADVANCE_CARE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
 			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_PHARMACIST_SHARED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_TRANSFER_REASON_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME"/></xsl:when>
             <xsl:when test="/cda:ClinicalDocument/cda:code/@displayName and
                             string-length(/cda:ClinicalDocument/cda:code/@displayName) &gt; 0">
                 <xsl:value-of select="/cda:ClinicalDocument/cda:code/@displayName"/>
@@ -593,7 +630,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    
+
     <!-- CDA Document Title -->
     <xsl:variable name="cdaDocumentTitle">
         <xsl:choose>
@@ -831,7 +868,8 @@
                 <xsl:comment><xsl:value-of select="$VERSION_NOTE"/></xsl:comment>
                 
                 <xsl:element name="title"><xsl:value-of select="$documentRenderingViewTitle"/></xsl:element>
-                <xsl:call-template name="addCSS"/>
+                <!--<xsl:call-template name="addCSS"/>-->
+                <link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.2x.css"/>
             </xsl:element> <!-- </head> -->
             <xsl:element name="body">
                 <!-- Display the Banner -->
@@ -2836,6 +2874,11 @@
                                 <xsl:with-param name="participantType">Patient's Nominated Contact</xsl:with-param>
                             </xsl:call-template>
                         </xsl:when>
+                        <xsl:when test="./@typeCode='NOT'">
+                            <xsl:call-template name="getParticipantsTableBodyRow">
+                                <xsl:with-param name="participantType">Urgent Notification Contact</xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:when>						
                         <xsl:otherwise>
                             <xsl:call-template name="getParticipantsTableBodyRow"/>
                         </xsl:otherwise>
@@ -4617,7 +4660,6 @@
                 width: <xsl:value-of select="$FULL_CONTENT_WIDTH_PCT"/>%;
                 border-spacing: 0px; 
                 padding: 0px;
-                border-spacing: 0px;
                 empty-cells: show;
                 border: 1px SOLID #EEEEEE;
                 table-layout: auto;
@@ -4783,7 +4825,6 @@
             .paragraph {
                 border-spacing: 0px; 
                 padding: 0px;
-                border-spacing: 0px;
                 empty-cells: show;
                 border: 0px SOLID #EEEEEE;                    
                 word-wrap: break-word;
@@ -4844,7 +4885,6 @@
             
             .addressdl {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -4858,7 +4898,6 @@
             
             .addressdd {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -4879,7 +4918,6 @@
             
             .contactdetailsdl {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -4893,7 +4931,6 @@
             
             .contactdetailsdd {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -4924,7 +4961,7 @@
                 word-wrap: break-word;
                 height: <xsl:value-of select="$BANNER_HEIGHT_PX"/>px;
                 _position:absolute;
-                _top:expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+                /* _top:expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); */
             }
 
             .BANNER_BACK {
@@ -4977,7 +5014,6 @@
             }
 
             .bannerDl {
-                width: 100%;
                 display: inline;
             }
             
@@ -5046,7 +5082,6 @@
                 width: <xsl:value-of select="$DETAILS_HALF_TABLE_TD_WIDTH_PCT"/>%;
                 word-wrap: break-word;
                 vertical-align: top;
-                word-wrap: break-word;
             }
 
             .identifier {
@@ -5178,7 +5213,6 @@
                 padding: 0px;
                 color: #000000;
                 margin: 0px;
-                padding: 0px;
                 min-width: <xsl:value-of select="$MINIMUM_CONTENT_WIDTH_PX"/>px;
                 max-width: <xsl:value-of select="$FULL_CONTENT_WIDTH_PX"/>px;
             }
@@ -5557,8 +5591,15 @@
                                 
                                 <xsl:choose>
                                     <xsl:when test="starts-with(./@value, 'tel:') ">Phone</xsl:when>
-                                    <xsl:when test="starts-with(./@value, 'fax:') ">FAX</xsl:when>
+                                    <xsl:when test="starts-with(./@value, 'fax:') ">Fax</xsl:when>
+									<xsl:when test="starts-with(./@value, 'modem:') ">Modem</xsl:when>
                                     <xsl:when test="starts-with(./@value, 'mailto:') ">Email</xsl:when>                                    
+									<xsl:when test="starts-with(./@value, 'http:') ">Website</xsl:when> 
+									<xsl:when test="starts-with(./@value, 'https:') ">Website</xsl:when> 
+									<xsl:when test="starts-with(./@value, 'telnet:') ">Telnet</xsl:when>                                    
+									<xsl:when test="starts-with(./@value, 'nfs:') ">NFS</xsl:when>                                    
+									<xsl:when test="starts-with(./@value, 'ftp:') ">FTP</xsl:when>                                    
+									<xsl:when test="starts-with(./@value, 'mllp:') ">MLLP</xsl:when>                                    
                                     <xsl:otherwise>Contact details</xsl:otherwise>
                                 </xsl:choose>
                                 
@@ -6153,11 +6194,20 @@
         <xsl:choose>
             <xsl:when test="$telecom and string-length($telecom/@value) &gt; 0">
                 <xsl:choose>
-                    <xsl:when test="contains($telecom/@value, ':')">
+                    <xsl:when test="contains($telecom/@value, 'tel:') or contains($telecom/@value, 'fax:') or contains($telecom/@value, 'modem:') or contains($telecom/@value, 'mailto:')">
                         <xsl:variable name="value" select="substring-after($telecom/@value, ':')"/>
                         <xsl:if test="$value">
                             <xsl:value-of select="$value"/>
                         </xsl:if>
+                    </xsl:when>
+                    <xsl:when test="(contains($telecom/@value, 'http:') or contains($telecom/@value, 'https:')) and $makeContactWebsitesClickable='true'">
+						<xsl:element name="a">
+							<xsl:attribute name="target">_blank</xsl:attribute>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$telecom/@value"/>
+							</xsl:attribute>
+							<xsl:value-of select="$telecom/@value"/>
+						</xsl:element>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$telecom/@value"/>

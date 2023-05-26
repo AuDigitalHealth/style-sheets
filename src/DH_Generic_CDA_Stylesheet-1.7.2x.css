@@ -130,7 +130,6 @@
                 width: 100%;
                 border-spacing: 0px; 
                 padding: 0px;
-                border-spacing: 0px;
                 empty-cells: show;
                 border: 1px SOLID #EEEEEE;
                 table-layout: auto;
@@ -296,7 +295,6 @@
             .paragraph {
                 border-spacing: 0px; 
                 padding: 0px;
-                border-spacing: 0px;
                 empty-cells: show;
                 border: 0px SOLID #EEEEEE;                    
                 word-wrap: break-word;
@@ -357,7 +355,6 @@
             
             .addressdl {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -371,7 +368,6 @@
             
             .addressdd {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -392,7 +388,6 @@
             
             .contactdetailsdl {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -406,7 +401,6 @@
             
             .contactdetailsdd {
                 display: inline;
-                margin: 0px;
                 padding: 0px;
                 text-align: left;
             }
@@ -437,7 +431,7 @@
                 word-wrap: break-word;
                 height: 110px;
                 _position:absolute;
-                _top:expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+                /* _top:expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px'); */
             }
 
             .BANNER_BACK {
@@ -490,7 +484,6 @@
             }
 
             .bannerDl {
-                width: 100%;
                 display: inline;
             }
             
@@ -559,7 +552,6 @@
                 width: 65%;
                 word-wrap: break-word;
                 vertical-align: top;
-                word-wrap: break-word;
             }
 
             .identifier {
@@ -691,7 +683,6 @@
                 padding: 0px;
                 color: #000000;
                 margin: 0px;
-                padding: 0px;
                 min-width: 760px;
                 max-width: 1000px;
             }

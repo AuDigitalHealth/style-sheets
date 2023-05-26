@@ -17,6 +17,17 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.2 | 26/05/2023
+---
+- Tidy up css
+- Support for https in electronic medium
+- Added test for all other Communication Medium types
+- Added variable to make contact websites clickable - off by default
+- Added NOT - Urgent Notification Contact for Participant
+- Added support for HL7 fhir gender types
+- Added support for ACTS documents
+- Added support for MyMedicare Registered Practice Information
+
 #### DH_Generic_CDA_Stylesheet-1.7.1 | 11/02/2022
 ---
 - Fix issue around Encounter details not showing in Admin Details section for other docs
