@@ -17,6 +17,12 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.3 | 05/10/2023
+---
+- Fix Bug NAME to name
+- Added support for Gender Identity
+
+
 #### DH_Generic_CDA_Stylesheet-1.7.2 | 26/05/2023
 ---
 - Tidy up css

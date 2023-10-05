@@ -32,6 +32,10 @@
     
     Revision History:
 
+	Version 1.7.3 | 05/10/2023
+	- Fix Bug NAME to name
+	- Added support for Gender Identity
+
 	Version 1.7.2 | 26/05/2023
 	- Tidy up css
 	- Support for https in electronic medium
@@ -41,7 +45,7 @@
 	- Added support for HL7 fhir gender types
 	- Added support for ACTS documents
 	- Added support for MyMedicare Registered Practice Information
-	
+
 	Version 1.7.1 | 11/02/2022
 	- Fix issue around Encounter details not showing in Admin Details section for other docs
 	- Param added to hide Admin Details
@@ -280,11 +284,11 @@
 	<xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.222</xsl:variable>
 	<xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.226</xsl:variable>
 	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.237</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32044</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32046</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32049</xsl:variable>
-	<xsl:variable NAME="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32048</xsl:variable>
-	
+	<xsl:variable name="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32044</xsl:variable>
+	<xsl:variable name="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32046</xsl:variable>
+	<xsl:variable name="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32049</xsl:variable>
+	<xsl:variable name="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32048</xsl:variable>
+
 	<!-- Clinical Document Type Names -->
     <xsl:variable name="DH_DISCHARGE_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Discharge Summary</xsl:variable>
     <xsl:variable name="DH_SHARED_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Shared Health Summary</xsl:variable>
@@ -312,10 +316,10 @@
     <xsl:variable name="DH_DIAGNOSTIC_IMAGING_REPORT_CLINICAL_DOCUMENT_TYPE_NAME">Diagnostic Imaging Report</xsl:variable>
     <xsl:variable name="DH_ADVANCE_CARE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME">Advance Care Information</xsl:variable>
 	<xsl:variable name="DH_PHARMACIST_SHARED_MEDICINES_LIST_CLINICAL_DOCUMENT_TYPE_NAME">Pharmacist Shared Medicines List</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Transfer Reason</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Medication Chart</xsl:variable>
-	<xsl:variable NAME="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Health Summary</xsl:variable>
-	<xsl:variable NAME="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME">MyMedicare Registered Practice Information</xsl:variable>
+	<xsl:variable name="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Transfer Reason</xsl:variable>
+	<xsl:variable name="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Medication Chart</xsl:variable>
+	<xsl:variable name="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Health Summary</xsl:variable>
+	<xsl:variable name="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME">MyMedicare Registered Practice Information</xsl:variable>
 	
 	<!-- Accessibility Global Documents Text -->
 	<xsl:variable name="ADVANCE_CARE_PLANNING_IFRAME_TITLE_TEXT">PDF attachment containing information about an advance care plan.</xsl:variable>
@@ -544,6 +548,35 @@
         </xsl:if>
     </xsl:variable>
      
+    <xsl:variable name="patientGender">
+	
+		<xsl:if test="count(/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]) = 1">
+            <xsl:choose>
+				<!-- Sex -->
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446151000124109'">Male</xsl:when>
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446141000124107'">Female</xsl:when>
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '33791000087105'">Non-binary</xsl:when>
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'unknown'">Unknown</xsl:when>
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'asked-declined'">Prefer not to answer</xsl:when>
+                <xsl:otherwise>
+					<!-- Show what is there -->
+					<xsl:value-of select="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@displayName" />
+				</xsl:otherwise>
+            </xsl:choose>					  
+		</xsl:if>
+    </xsl:variable>	 
+	 
+	 <xsl:variable name="patientSexGender">
+		<xsl:value-of select="$patientSex"/><xsl:if test="$patientGender!=''">|<xsl:value-of select="$patientGender"/></xsl:if>
+	 </xsl:variable>
+	 
     <xsl:variable name="patientIndigenousStatus">
         <xsl:if test="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:ethnicGroupCode/@code and
                       (string-length(/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:ethnicGroupCode/@code) &gt; 0) and
@@ -705,7 +738,7 @@
                     <xsl:when test="string-length($patientMRN) &gt; 0 and string-length($patientIHI) &gt; 0">
                         <xsl:value-of select="concat($patientName,
                                                      ' | ',
-                                                     $patientSex,
+                                                     $patientSexGender,
                                                      ' | DoB: ',
                                                      $patientDateOfBirth,
                                                      ' (', 
@@ -720,7 +753,7 @@
                     <xsl:when test="$patientMRN='' and string-length($patientIHI) &gt; 0">
                         <xsl:value-of select="concat($patientName,
                                                       ' | ',
-                                                      $patientSex,
+                                                      $patientSexGender,
                                                       ' | DoB: ',
                                                       $patientDateOfBirth,
                                                       ' (', 
@@ -733,7 +766,7 @@
                     <xsl:when test="string-length($patientMRN) &gt; 0 and $patientIHI=''">
                         <xsl:value-of select="concat($patientName,
                             ' | ',
-                            $patientSex,
+                            $patientSexGender,
                             ' | DoB: ',
                             $patientDateOfBirth,
                             ' (', 
@@ -746,7 +779,7 @@
                     <xsl:otherwise>
                         <xsl:value-of select="concat($patientName,
                                                      ' | ',
-                                                      $patientSex,
+                                                      $patientSexGender,
                                                      ' | DoB: ',
                                                      $patientDateOfBirth,
                                                      ' (', 
@@ -869,7 +902,7 @@
                 
                 <xsl:element name="title"><xsl:value-of select="$documentRenderingViewTitle"/></xsl:element>
                 <!--<xsl:call-template name="addCSS"/>-->
-                <link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.2x.css"/>
+				<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.3x.css"/>
             </xsl:element> <!-- </head> -->
             <xsl:element name="body">
                 <!-- Display the Banner -->
@@ -1124,13 +1157,24 @@
                     </xsl:element>
                     <xsl:element name="dt">
                         <xsl:attribute name="class">bannerDt</xsl:attribute>
-                        SEX
+                        Sex
                     </xsl:element>
                     <xsl:element name="dd">
                         <xsl:attribute name="class">bannerDd</xsl:attribute>
                         <xsl:value-of select="$patientSex"/>
                     </xsl:element>
                     
+                    <xsl:if test="$patientGender!=''">
+                        <xsl:element name="dt">
+                            <xsl:attribute name="class">bannerDt</xsl:attribute>
+                            Gender identity
+                        </xsl:element>
+                        <xsl:element name="dd">
+                            <xsl:attribute name="class">bannerDd</xsl:attribute>
+                            <xsl:value-of select="$patientGender"/>
+                        </xsl:element>
+                    </xsl:if>					
+					
                     <xsl:if test="$patientIHI!=''">
                         <xsl:element name="dt">
                             <xsl:attribute name="class">bannerDt</xsl:attribute>
@@ -2141,6 +2185,22 @@
                         <xsl:value-of select="$patientSex"/>
                     </xsl:element> <!-- </td> -->
                 </xsl:element> <!-- </tr> -->
+
+				<xsl:if test="string-length($patientGender) &gt; 0">
+                    <xsl:element name="tr">
+                        <xsl:element name="th">
+                            <xsl:attribute name="class">detailsHalfTableTh</xsl:attribute>
+                            <xsl:element name="span">
+                                <xsl:attribute name="class">detailsHalfTableThSpan</xsl:attribute>
+                                Gender Identity
+                            </xsl:element>
+                        </xsl:element> <!-- </th> -->
+                        <xsl:element name="td">
+                            <xsl:attribute name="class">detailsHalfTableTd</xsl:attribute>
+                            <xsl:value-of select="$patientGender"/>
+                        </xsl:element> <!-- </td> -->
+                    </xsl:element> <!-- </tr> -->
+                </xsl:if>
 
                 <xsl:if test="string-length($patientIndigenousStatus) &gt; 0">
                     <xsl:element name="tr">
@@ -5027,7 +5087,7 @@
                 margin-left: 0px;
                 display: inline;
                 font-size: 13px;
-                margin-right: 30px;
+                margin-right: 20px;
             }
             
 			.banner_patient_name {
