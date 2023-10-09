@@ -32,6 +32,10 @@
     
     Revision History:
 
+	Version 1.7.4 | 09/10/2023
+	- Fix Version number
+	- Added support for Gender Identity originalText
+
 	Version 1.7.3 | 05/10/2023
 	- Fix Bug NAME to name
 	- Added support for Gender Identity
@@ -231,7 +235,7 @@
     <xsl:variable name="DH_CDA_RENDERING_SPECIFICATION_OID">1.2.36.1.2001.1001.100.149</xsl:variable>
     
     <!-- Version of the Generic CDA Stylesheet -->
-    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.2</xsl:variable>
+    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.4</xsl:variable>
     
     
     <!-- Version note -->
@@ -565,9 +569,17 @@
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
 					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'asked-declined'">Prefer not to answer</xsl:when>
                 <xsl:otherwise>
-					<!-- Show what is there -->
-					<xsl:value-of select="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
-					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@displayName" />
+					<!-- Show originalText or displayName -->
+					<xsl:if test="string-length(/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+						/cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/cda:originalText) &gt; 0">
+						<xsl:value-of select="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+						/cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/cda:originalText" />
+					</xsl:if>
+					<xsl:if test="string-length(/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+						/cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/cda:originalText) = 0">
+						<xsl:value-of select="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+						/cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@displayName" />
+					</xsl:if>
 				</xsl:otherwise>
             </xsl:choose>					  
 		</xsl:if>
@@ -901,8 +913,8 @@
                 <xsl:comment><xsl:value-of select="$VERSION_NOTE"/></xsl:comment>
                 
                 <xsl:element name="title"><xsl:value-of select="$documentRenderingViewTitle"/></xsl:element>
-                <!--<xsl:call-template name="addCSS"/>-->
-				<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.3x.css"/>
+                <xsl:call-template name="addCSS"/>
+				<!--<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.3x.css"/>-->
             </xsl:element> <!-- </head> -->
             <xsl:element name="body">
                 <!-- Display the Banner -->
