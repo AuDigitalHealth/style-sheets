@@ -32,6 +32,10 @@
     
     Revision History:
 
+	Version 1.7.5 | 20/05/2024
+	- Added support for Aged Care Support Plan
+	- Added support for Medical Conditions View
+
 	Version 1.7.4 | 09/10/2023
 	- Fix Version number
 	- Added support for Gender Identity originalText
@@ -235,7 +239,7 @@
     <xsl:variable name="DH_CDA_RENDERING_SPECIFICATION_OID">1.2.36.1.2001.1001.100.149</xsl:variable>
     
     <!-- Version of the Generic CDA Stylesheet -->
-    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.4</xsl:variable>
+    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.5</xsl:variable>
     
     
     <!-- Version note -->
@@ -292,6 +296,8 @@
 	<xsl:variable name="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32046</xsl:variable>
 	<xsl:variable name="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32049</xsl:variable>
 	<xsl:variable name="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32048</xsl:variable>
+	<xsl:variable name="DH_MEDICAL_CONDITIONS_VIEW_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32051</xsl:variable>
+	<xsl:variable name="DH_AGED_CARE_SUPPORT_PLAN_CDA_IMPLEMENTATION_GUIDE_OID">1.2.36.1.2001.1001.100.1002.32052</xsl:variable>
 
 	<!-- Clinical Document Type Names -->
     <xsl:variable name="DH_DISCHARGE_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Discharge Summary</xsl:variable>
@@ -323,7 +329,9 @@
 	<xsl:variable name="DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Transfer Reason</xsl:variable>
 	<xsl:variable name="DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Medication Chart</xsl:variable>
 	<xsl:variable name="DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME">Residential Care Health Summary</xsl:variable>
-	<xsl:variable name="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME">MyMedicare Registered Practice Information</xsl:variable>
+	<xsl:variable name="DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME">MyMedicare Registered Practice Information</xsl:variable>
+	<xsl:variable name="DH_MEDICAL_CONDITIONS_VIEW_CLINICAL_DOCUMENT_TYPE_NAME">Medical Conditions View</xsl:variable>
+	<xsl:variable name="DH_AGED_CARE_SUPPORT_PLAN_CLINICAL_DOCUMENT_TYPE_NAME">Aged Care Support Plan</xsl:variable>
 	
 	<!-- Accessibility Global Documents Text -->
 	<xsl:variable name="ADVANCE_CARE_PLANNING_IFRAME_TITLE_TEXT">PDF attachment containing information about an advance care plan.</xsl:variable>
@@ -665,9 +673,10 @@
 			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_TRANSFER_REASON_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_TRANSFER_REASON_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
 			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_MEDICATION_CHART_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_MEDICATION_CHART_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
 			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_RESIDENTIAL_CARE_HEALTH_SUMMARY_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
-			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_DOCUMENT_TYPE_NAME"/></xsl:when>
-            <xsl:when test="/cda:ClinicalDocument/cda:code/@displayName and
-                            string-length(/cda:ClinicalDocument/cda:code/@displayName) &gt; 0">
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_MYMEDICARE_REGISTERED_PRACTICE_INFORMATION_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_MEDICAL_CONDITIONS_VIEW_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_MEDICAL_CONDITIONS_VIEW_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+			<xsl:when test="/cda:ClinicalDocument/cda:templateId[@root=$DH_AGED_CARE_SUPPORT_PLAN_CDA_IMPLEMENTATION_GUIDE_OID]"><xsl:value-of select="$DH_AGED_CARE_SUPPORT_PLAN_CLINICAL_DOCUMENT_TYPE_NAME"/></xsl:when>
+            <xsl:when test="/cda:ClinicalDocument/cda:code/@displayName and string-length(/cda:ClinicalDocument/cda:code/@displayName) &gt; 0">
                 <xsl:value-of select="/cda:ClinicalDocument/cda:code/@displayName"/>
             </xsl:when>
             <xsl:otherwise>
@@ -913,8 +922,8 @@
                 <xsl:comment><xsl:value-of select="$VERSION_NOTE"/></xsl:comment>
                 
                 <xsl:element name="title"><xsl:value-of select="$documentRenderingViewTitle"/></xsl:element>
-                <!--<xsl:call-template name="addCSS"/>-->
-				<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.3x.css"/>
+                <xsl:call-template name="addCSS"/>
+				<!--<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.5x.css"/>-->
             </xsl:element> <!-- </head> -->
             <xsl:element name="body">
                 <!-- Display the Banner -->

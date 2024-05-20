@@ -17,6 +17,11 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.5 | 20/05/2024
+---
+- Added support for Aged Care Support Plan
+- Added support for Medical Conditions View
+
 #### DH_Generic_CDA_Stylesheet-1.7.4 | 09/10/2023
 ---
 - Fix Version number
