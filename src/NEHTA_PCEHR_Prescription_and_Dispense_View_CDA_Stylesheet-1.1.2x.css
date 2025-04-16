@@ -1,66 +1,3 @@
-@media print
-{
-  .BANNER {
-            display: none;
-            }
-            
-            .BANNER_BACK {
-            top: 0px;
-            background-color: #000000;
-            color: #FFFFFF;
-            max-width: 1000px;
-            min-width: 760px;
-            width: 100%;
-            z-index: 10000;
-            word-wrap: break-word;
-            height: 90px;
-            }
-}
-@media screen
-{
- .showHideHeaderDetailsButtonTableRow {
-            }
-			
-            .DETAILS {
-                min-width: 740px;
-                max-width: 980px;
-                width: 100%
-                margin: 0px;                      
-                bottom: 0px; 
-                background: #FFFFFF;
-                padding: 0px 0px 0px 0px;
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-
-            
-            div#ROOT {
-                position:absolute;
-                min-width: 760px;
-                max-width: 1024px;
-            }
-            
-            .CONTENT {
-                min-width: 760px;
-                max-width: 1000px;
-                width: 100%
-                margin: 0px;                      
-                bottom: 0px; 
-                background: #FFFFFF;
-            }
-
-            .BODY {
-                min-width: 760px;
-                max-width: 1004px;
-                width: 100%
-                margin: 0px;                      
-                bottom: 0px; 
-                background: #FFFFFF;
-                padding: 0px 0px 0px 0px;
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-}
 @media all
 {
             .nbspSpan {
@@ -819,4 +756,69 @@
             a.documentLink:active { 
             color: #FF0000;
             } 
+}
+
+@media screen
+{
+ .showHideHeaderDetailsButtonTableRow {
+            }
+			
+            .DETAILS {
+                min-width: 740px;
+                max-width: 980px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+                padding: 0px 0px 0px 0px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            
+            div#ROOT {
+                position:absolute;
+                min-width: 760px;
+                max-width: 1024px;
+            }
+            
+            .CONTENT {
+                min-width: 760px;
+                max-width: 1000px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+            }
+
+            .BODY {
+                min-width: 760px;
+                max-width: 1004px;
+                width: 100%
+                margin: 0px;                      
+                bottom: 0px; 
+                background: #FFFFFF;
+                padding: 0px 0px 0px 0px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+}
+
+@media print
+{
+  .BANNER {
+            display: none;
+            }
+            
+            .BANNER_BACK {
+            top: 0px;
+            background-color: #000000;
+            color: #FFFFFF;
+            max-width: 1000px;
+            min-width: 760px;
+            width: 100%;
+            z-index: 10000;
+            word-wrap: break-word;
+            height: 90px;
+            }
 }

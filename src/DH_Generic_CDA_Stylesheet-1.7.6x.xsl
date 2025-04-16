@@ -32,6 +32,11 @@
     
     Revision History:
 
+	Version 1.7.6 | 16/04/2025
+	- Updated support for Gender Identity
+	- Updated Banner to include patient suffix
+	- Fix order of media in css file
+
 	Version 1.7.5 | 20/05/2024
 	- Added support for Aged Care Support Plan
 	- Added support for Medical Conditions View
@@ -239,7 +244,7 @@
     <xsl:variable name="DH_CDA_RENDERING_SPECIFICATION_OID">1.2.36.1.2001.1001.100.149</xsl:variable>
     
     <!-- Version of the Generic CDA Stylesheet -->
-    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.5</xsl:variable>
+    <xsl:variable name="DH_GENERIC_CDA_STYLESHEET_VERSION">1.7.6</xsl:variable>
     
     
     <!-- Version note -->
@@ -446,6 +451,8 @@
 
     <xsl:variable name="patientPrefix" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name[1]/cda:prefix"/>    
 
+	<xsl:variable name="patientSuffix" select="/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name[1]/cda:suffix"/>
+
     <xsl:variable name="patientFamilyNameNullFlavor">
         <xsl:if test="string-length(/cda:ClinicalDocument/cda:recordTarget/cda:patientRole/cda:patient/cda:name[1]/cda:family/@nullFlavor) &gt; 0">
             <xsl:call-template name="show-null-flavor-value">
@@ -567,13 +574,15 @@
             <xsl:choose>
 				<!-- Sex -->
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
-					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446151000124109'">Male</xsl:when>
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446151000124109'">Man, or boy, or male</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
-					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446141000124107'">Female</xsl:when>
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '446141000124107'">Woman, or girl, or female</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
 					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = '33791000087105'">Non-binary</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
 					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'unknown'">Unknown</xsl:when>
+                <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
+					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'not-asked'">Not asked</xsl:when>
                 <xsl:when test="/cda:ClinicalDocument/cda:component/cda:structuredBody/cda:component/cda:section[(cda:code/@code='102.16080') and (cda:code/@codeSystem='1.2.36.1.2001.1001.101')]
 					  /cda:entry/cda:observation[(cda:code/@code='76691-5') and (cda:code/@codeSystem='2.16.840.1.113883.6.1')]/cda:value/@code = 'asked-declined'">Prefer not to answer</xsl:when>
                 <xsl:otherwise>
@@ -922,8 +931,8 @@
                 <xsl:comment><xsl:value-of select="$VERSION_NOTE"/></xsl:comment>
                 
                 <xsl:element name="title"><xsl:value-of select="$documentRenderingViewTitle"/></xsl:element>
-                <xsl:call-template name="addCSS"/>
-				<!--<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.5x.css"/>-->
+                <!--<xsl:call-template name="addCSS"/>-->
+				<link rel="stylesheet" type="text/css" href="DH_Generic_CDA_Stylesheet-1.7.6x.css"/>
             </xsl:element> <!-- </head> -->
             <xsl:element name="body">
                 <!-- Display the Banner -->
@@ -1146,8 +1155,11 @@
                             </xsl:if>                            
                             <xsl:element name="span">
                                 <xsl:attribute name="class">bold</xsl:attribute>
-                                <xsl:value-of select="$patientFamilyName"/>
+                                <xsl:value-of select="$patientFamilyName"/><xsl:text> </xsl:text>
                             </xsl:element>
+                            <xsl:if test="$patientSuffix!='' and string-length($patientSuffix) &gt; 0">
+                                <xsl:value-of select="$patientSuffix"/>
+                            </xsl:if>							
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:element name="b">
@@ -4684,6 +4696,7 @@
     <!--================================================================================================================================================================================-->
  
     <xsl:template name="addCSS">
+
         <xsl:element name="style">
             <xsl:attribute name="type">text/css</xsl:attribute>
             <xsl:attribute name="media">all</xsl:attribute>
@@ -5358,8 +5371,8 @@
 			}
 			
         </xsl:element> <!--  </style text="text/css" media="all"> -->
-        
-        <xsl:element name="style">
+
+	    <xsl:element name="style">
             <xsl:attribute name="type">text/css</xsl:attribute>
             <xsl:attribute name="media">screen</xsl:attribute>
             <!-- CSS classes -->
@@ -5412,7 +5425,7 @@
                 margin-right: <xsl:value-of select="$RIGHT_MARGIN_WIDTH_PX"/>px;
             }
         </xsl:element> <!--  </style text="text/css" media="screen"> -->
-        
+
         <xsl:element name="style">
             <xsl:attribute name="type">text/css</xsl:attribute>
             <xsl:attribute name="media">print</xsl:attribute>
@@ -5450,7 +5463,8 @@
                 display: none;
             }
         </xsl:element> <!--  </style text="text/css" media="print"> -->
-   </xsl:template>
+
+    </xsl:template>
  
     <xsl:template name="getHorizontalSpacer">
         <xsl:element name="div">

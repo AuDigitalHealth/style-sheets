@@ -17,6 +17,13 @@ bug is found.
 Version 1.3.x will continue to be maintained adding any further
 functionality deemed necessary or requested.
 
+#### DH_Generic_CDA_Stylesheet-1.7.6 | 16/04/2025
+---
+- Updated support for Gender Identity
+- Updated Banner to include patient suffix
+- Fix order of media in css file
+
+
 #### DH_Generic_CDA_Stylesheet-1.7.5 | 20/05/2024
 ---
 - Added support for Aged Care Support Plan
@@ -315,6 +322,10 @@ functionality deemed necessary or requested.
 ### > PCEHR_Prescription_and_Dispense_View Style Sheet Revision Log
 ---
 The below is a history log of changes made to the style sheet.
+
+#### NEHTA_PCEHR_Prescription_and_Dispense_View_CDA_Stylesheet-1.1.2 - 16/04/2025
+---
+- Fix order of media in css file
 
 #### NEHTA_PCEHR_Prescription_and_Dispense_View_CDA_Stylesheet-1.1.1 - 25/11/2020
 ---
